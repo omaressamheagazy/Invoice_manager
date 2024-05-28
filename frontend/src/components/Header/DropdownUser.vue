@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
-
+import { useAuthStore } from "@/stores/AuthStore.ts"
+import { onClickOutside } from '@vueuse/core'
+const authStore = useAuthStore()
 const target = ref(null)
 const dropdownOpen = ref(false)
 
@@ -124,6 +125,7 @@ onClickOutside(target, () => {
       </ul>
       <button
         class="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+        @click="authStore.logout()"
       >
         <svg
           class="fill-current"

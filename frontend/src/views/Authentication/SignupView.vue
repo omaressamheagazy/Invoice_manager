@@ -38,7 +38,9 @@ async function register() {
       console.log('User registered successfully')
       authStore.setGuest(GUEST.isNotGuest)
       router.push({ name: 'app' })
-    } 
+    } else {
+      throw new Error('User registration failed, please try again')
+    }
     
     
 
@@ -48,9 +50,7 @@ async function register() {
     if (error.response && error.response.status === 422) {
       errorMsg.value = error.response.data.errors
     } else {
-      console.log(error);
-      
-      // errorMsg.value = error.response.data.message
+      errorMsg.value = [error.message]
     }
 
   }
