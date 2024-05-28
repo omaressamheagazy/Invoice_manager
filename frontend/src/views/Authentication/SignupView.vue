@@ -38,20 +38,19 @@ async function register() {
       console.log('User registered successfully')
       authStore.setGuest(GUEST.isNotGuest)
       router.push({ name: 'app' })
-    } else {
-      throw new Error('User registration failed, please try again')
-    }
+    } 
     
     
 
   } catch (error) {
 
     showError.value = true
-    if (error.response && error.response.status === 422) {
-      errorMsg.value = error.response.data.errors
-    } else {
-      errorMsg.value = [error.message]
-    }
+    if (error.response && error.response.data) {
+      if(error.response.data.errors)
+        errorMsg.value = error.response.data.errors
+      else
+        errorMsg.value = error.response.data.message
+    } 
 
   }
 }

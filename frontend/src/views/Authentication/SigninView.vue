@@ -14,8 +14,8 @@ import AlertError from '@/components/Alerts/AlertError.vue';
 
 const pageTitle = ref('Sign In')
 const authStore = useAuthStore();
-let showError = ref(false)
-let errorMsg = ref([])
+const showError = ref(false)
+const errorMsg = ref([])
 
 
 let user: { email: any, password: any, remember: any } = {
@@ -41,6 +41,9 @@ async function login() {
   }
   catch (error) {
     showError.value = true
+    errorMsg.value = error.response?.data?.errors || error.response?.data?.message || '';
+    console.log(errorMsg.value);
+    
     console.log('after error', user.password);
     console.log(showError.value);
     console.log(error)
