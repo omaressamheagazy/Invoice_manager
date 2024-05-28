@@ -24,16 +24,16 @@ services:
             POSTGRES_PASSWORD: postgres
             POSTGRES_DB: postgres
         volumes:
-            - db-invoice:/var/lib/postgresql/data
-    pgadmin-invoice:
+            - database-invoice:/var/lib/postgresql/data
+    pgAdminUI:
         image: dpage/pgadmin4
-        container_name: pgAdmin-invoice
+        container_name: pgAdminUI
         ports:
-          - "5060:80"
+          - "5050:80"
         depends_on:
           - database-invoice 
         environment:
           PGADMIN_DEFAULT_EMAIL: omaressamhegazy6@gmail.com
           PGADMIN_DEFAULT_PASSWORD: password 
 volumes:
-    db-invoice: ~
+    database-invoice: ~

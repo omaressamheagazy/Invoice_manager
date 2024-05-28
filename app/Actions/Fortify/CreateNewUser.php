@@ -29,8 +29,6 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
-            'public_key' => ['required', 'string'],
-            'private_key' => ['required', 'string'],
 
         ])->validate();
 
@@ -38,8 +36,6 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-            'public_key' => $input['public_key'],
-            'private_key' => $input['private_key'],
         ]);
     }
 }
