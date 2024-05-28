@@ -44,9 +44,7 @@ export const routes = [
         name: 'app',
         component: Dashboard,
         meta: {
-            requireGuest: true,
-
-            // requiresAuth: true,
+            requiresAuth: true,
         },
         children: [
             {

@@ -10,13 +10,9 @@ const props = defineProps(['subtitle', 'title', 'customClasses', 'description'])
     <div class="flex flex-wrap items-stretch">
       <div class="hidden w-full items-center justify-center xl:flex xl:w-1/2">
         <div class="py-17.5 text-center w-full max-w-[350px]">
-          <router-link class="mb-5.5 inline-block" to="/">
-            <img class="hidden dark:block" src="@/assets/images/logo/logo.svg" alt="Logo" />
-            <img class="dark:hidden" src="@/assets/images/logo/logo-dark.svg" alt="Logo" />
-          </router-link>
 
           <p class="font-medium">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit suspendisse.
+            Welecome to invoice generator app where you can generate your invoice and share it with your clients.
           </p>
 
           <span class="mt-15 inline-block">

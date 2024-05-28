@@ -15,7 +15,7 @@ async function middleware(to, from, next) {
         if(!authUser) authStore.setGuest(GUEST.isGuest);
     }
     if (to.meta.requiresAuth && !authStore.user) next({ name: 'login' })  // route require authentication, and user not authenticated
-    else if (to.meta.requireGuest && authStore.user) next({ name: 'eCommerce' }) // requested route doesn't requre auth,and user is authenticated
+    else if (to.meta.requireGuest && authStore.user) next({ name: 'app' }) // requested route doesn't requre auth,and user is authenticated
     else next()
 }
 router.beforeEach((to, from, next) => {
