@@ -28,10 +28,9 @@ export const useAuthStore = defineStore("authStore", {
             try {
                 await authApi.logout();
                 this.setGuest(GUEST.isGuest)
-                this.setPasswordInSeesion(null)
                 router.replace({ name: 'login' })
             } catch (error) {
-                console.log('error during logout', error)
+                alert('error during logout')
             }
         },
 
@@ -39,24 +38,6 @@ export const useAuthStore = defineStore("authStore", {
             window.localStorage.setItem('guest', value)
         },
 
-        setPasswordInSeesion(password) {
-            window.sessionStorage.setItem('password', password)
-        },
-        // {iv: iv, secretkey: secretkey}
-        setEncryptionKeys(encryptionKey) {
-            window.sessionStorage.setItem('encryptionKeys', JSON.stringify(encryptionKey))
-        },
-        setKeyPair(keyPair:{privateKey: string, publicKey: string} ): void {
-            window.sessionStorage.setItem('keyPair', JSON.stringify(keyPair))
-        },
-        getKeyPair(): {privateKey: string, publicKey: string} { 
-            const keyPairString = window.sessionStorage.getItem('keyPair');
-            return JSON.parse(keyPairString);
-        },
-        getEncryptionKeys(): {iv: string, secretKey: string} {
-            const encryptionKeyString = window.sessionStorage.getItem('encryptionKeys');
-            return JSON.parse(encryptionKeyString);
-        }
 
 
     }
