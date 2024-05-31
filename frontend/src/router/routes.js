@@ -3,6 +3,7 @@ import Dashboard from "@/views/Dashboard.vue";
 import NotFound from "@/views/NotFound.vue";
 import SigninView from '@/views/Authentication/SigninView.vue'
 import SignupView from '@/views/Authentication/SignupView.vue'
+import EmailVerificationView from '@/views/Pages/EmailVerificationView.vue'
 import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
 import FormElementsView from '@/views/Forms/FormElementsView.vue'
 import FormLayoutView from '@/views/Forms/FormLayoutView.vue'
@@ -52,8 +53,11 @@ export const routes = [
                 name: 'profile',
                 component: ProfileView,
             },
-
-
+            {
+                path: 'verfiy-email',
+                name: 'verifyEmail',
+                component: EmailVerificationView,
+            }
         ]
     },
     {
