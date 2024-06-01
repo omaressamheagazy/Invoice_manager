@@ -11,10 +11,10 @@ class Invoice extends Model
     protected $fillable = [
         'name',
         'email',
-        'phone',
+        'mobile',
         'service',
         'price_per_hour',
-        'working_hour',
+        'working_hours',
         'user_id'
     ];
 }

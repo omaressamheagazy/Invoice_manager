@@ -2,9 +2,7 @@
 import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import DefaultCard from '@/components/Forms/DefaultCard.vue'
 import InputGroup from '@/components/Forms/InputGroup.vue'
-import SelectGroup from '@/components/Forms/SelectGroup/SelectGroupTwo.vue'
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
-
+import invoiceApi from '@/services/API/invoice.api'
 import { ref } from 'vue'
 const invoice = {
   name: '',
@@ -12,12 +10,14 @@ const invoice = {
   email: '',
   service: '',
   price_per_hour: '',
-  working_hour: '',
+  working_hours: '',
   email_send_enabled: false
 }
 const pageTitle = ref('Create Invoice')
-function createInvoice() {
-  console.log(invoice)
+async function createInvoice() {
+  const response = await invoiceApi.createInvoice(invoice)
+  console.log(response);
+  
 }
 </script>
 
@@ -49,7 +49,7 @@ function createInvoice() {
           <InputGroup  v-model="invoice.price_per_hour" label="Price per hour" type="number" placeholder="Enter the price per hour"
             customClasses="w-full xl:w-1/2" required />
 
-          <InputGroup v-model="invoice.working_hour" label="Working hour" type="number" placeholder="Enter the total hours" customClasses="w-full xl:w-1/2"
+          <InputGroup v-model="invoice.working_hours" label="Working hours" type="number" placeholder="Enter the total hours" customClasses="w-full xl:w-1/2"
             required />
         </div>
 
