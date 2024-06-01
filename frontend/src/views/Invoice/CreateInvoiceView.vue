@@ -3,6 +3,8 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import DefaultCard from '@/components/Forms/DefaultCard.vue'
 import InputGroup from '@/components/Forms/InputGroup.vue'
 import invoiceApi from '@/services/API/invoice.api'
+import AlertError from '@/components/Alerts/AlertError.vue';
+
 import { ref } from 'vue'
 const invoice = {
   name: '',
@@ -14,10 +16,19 @@ const invoice = {
   email_send_enabled: false
 }
 const pageTitle = ref('Create Invoice')
+const errorMsg = ref([])
+const showError = ref(false)
+
+
 async function createInvoice() {
-  const response = await invoiceApi.createInvoice(invoice)
-  console.log(response);
-  
+  try {
+    const response = await invoiceApi.createInvoice(invoice)
+    console.log(response);
+  } catch (error) {
+    errorMsg.value = error.response?.data?.errors || error.response?.data?.message || '';
+    showError.value = true
+  }
+
 }
 </script>
 
@@ -28,29 +39,31 @@ async function createInvoice() {
 
   <!-- ====== Form Layout Section Start -->
   <!-- Contact Form Start -->
+  <AlertError v-if="showError" :errors="errorMsg"></AlertError>
+  <br>
   <DefaultCard cardTitle="Invoice Form">
     <form @submit.prevent="createInvoice">
       <div class="p-6.5">
         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <InputGroup  v-model="invoice.name" label="Name" type="text" placeholder="Enter the recipient name" customClasses="w-full xl:w-1/2"
-            required />
-
-          <InputGroup v-model="invoice.mobile" label="Moblie" type="text" placeholder="Enter the recipient mobile number"
+          <InputGroup v-model="invoice.name" label="Name" type="text" placeholder="Enter the recipient name"
             customClasses="w-full xl:w-1/2" required />
+
+          <InputGroup v-model="invoice.mobile" label="Moblie" type="text"
+            placeholder="Enter the recipient mobile number" customClasses="w-full xl:w-1/2" required />
         </div>
         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
           <InputGroup v-model="invoice.email" label="Email" type="email" placeholder="Enter the recipient email address"
             customClasses="w-full xl:w-1/2" required />
 
-          <InputGroup v-model="invoice.service" label="Service" type="text" placeholder="Enter the service name" customClasses="w-full xl:w-1/2"
-            required />
+          <InputGroup v-model="invoice.service" label="Service" type="text" placeholder="Enter the service name"
+            customClasses="w-full xl:w-1/2" required />
         </div>
         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <InputGroup  v-model="invoice.price_per_hour" label="Price per hour" type="number" placeholder="Enter the price per hour"
-            customClasses="w-full xl:w-1/2" required />
+          <InputGroup v-model="invoice.price_per_hour" label="Price per hour" type="number"
+            placeholder="Enter the price per hour" customClasses="w-full xl:w-1/2" required />
 
-          <InputGroup v-model="invoice.working_hours" label="Working hours" type="number" placeholder="Enter the total hours" customClasses="w-full xl:w-1/2"
-            required />
+          <InputGroup v-model="invoice.working_hours" label="Working hours" type="number"
+            placeholder="Enter the total hours" customClasses="w-full xl:w-1/2" required />
         </div>
 
 
@@ -59,10 +72,8 @@ async function createInvoice() {
         <div class="mt-5 mb-5.5 flex items-center justify-between">
           <label for="formCheckbox" class="flex cursor-pointer">
             <div class="relative pt-0.5">
-              <input v-model="invoice.email_send_enabled"  
-                   true-value="yes"
-                   false-value="no"
-                   type="checkbox" id="formCheckbox" class="taskCheckbox sr-only" />
+              <input v-model="invoice.email_send_enabled" true-value="yes" false-value="no" type="checkbox"
+                id="formCheckbox" class="taskCheckbox sr-only" />
               <div
                 class="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-form-strokedark dark:bg-form-input">
                 <span class="text-white opacity-0">
