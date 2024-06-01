@@ -5,6 +5,7 @@ import SigninView from '@/views/Authentication/SigninView.vue'
 import SignupView from '@/views/Authentication/SignupView.vue'
 import EmailVerificationView from '@/views/Pages/EmailVerificationView.vue'
 import CreateInvoiceView from '@/views/Invoice/CreateInvoiceView.vue'
+import InvoiceListView from '@/views/Invoice/InvoiceListView.vue'
 import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
 import FormElementsView from '@/views/Forms/FormElementsView.vue'
 import FormLayoutView from '@/views/Forms/FormLayoutView.vue'
@@ -59,6 +60,11 @@ export const routes = [
                 name: 'verifyEmail',
                 component: EmailVerificationView,
             }, 
+            {
+                path: 'invoices',
+                name: 'invoices',
+                component: InvoiceListView,
+            },
             {
                 path: 'create-invoice',
                 name: 'createInvoice',
