@@ -6,8 +6,19 @@ import SelectGroup from '@/components/Forms/SelectGroup/SelectGroupTwo.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 import { ref } from 'vue'
-
+const invoice = {
+  name: '',
+  mobile: '',
+  email: '',
+  service: '',
+  price_per_hour: '',
+  working_hour: '',
+  email_send_enabled: false
+}
 const pageTitle = ref('Create Invoice')
+function createInvoice() {
+  console.log(invoice)
+}
 </script>
 
 <template>
@@ -18,27 +29,27 @@ const pageTitle = ref('Create Invoice')
   <!-- ====== Form Layout Section Start -->
   <!-- Contact Form Start -->
   <DefaultCard cardTitle="Invoice Form">
-    <form action="#">
+    <form @submit.prevent="createInvoice">
       <div class="p-6.5">
         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <InputGroup label="Name" type="text" placeholder="Enter the recipient name" customClasses="w-full xl:w-1/2"
+          <InputGroup  v-model="invoice.name" label="Name" type="text" placeholder="Enter the recipient name" customClasses="w-full xl:w-1/2"
             required />
 
-          <InputGroup label="Moblie" type="text" placeholder="Enter the recipient mobile number"
+          <InputGroup v-model="invoice.mobile" label="Moblie" type="text" placeholder="Enter the recipient mobile number"
             customClasses="w-full xl:w-1/2" required />
         </div>
         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <InputGroup label="Email" type="email" placeholder="Enter the recipient email address"
+          <InputGroup v-model="invoice.email" label="Email" type="email" placeholder="Enter the recipient email address"
             customClasses="w-full xl:w-1/2" required />
 
-          <InputGroup label="Service" type="text" placeholder="Enter the service name" customClasses="w-full xl:w-1/2"
+          <InputGroup v-model="invoice.service" label="Service" type="text" placeholder="Enter the service name" customClasses="w-full xl:w-1/2"
             required />
         </div>
         <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <InputGroup label="Price per hour" type="number" placeholder="Enter the price per hour"
+          <InputGroup  v-model="invoice.price_per_hour" label="Price per hour" type="number" placeholder="Enter the price per hour"
             customClasses="w-full xl:w-1/2" required />
 
-          <InputGroup label="Working hour" type="number" placeholder="Enter the total hours" customClasses="w-full xl:w-1/2"
+          <InputGroup v-model="invoice.working_hour" label="Working hour" type="number" placeholder="Enter the total hours" customClasses="w-full xl:w-1/2"
             required />
         </div>
 
@@ -48,7 +59,10 @@ const pageTitle = ref('Create Invoice')
         <div class="mt-5 mb-5.5 flex items-center justify-between">
           <label for="formCheckbox" class="flex cursor-pointer">
             <div class="relative pt-0.5">
-              <input type="checkbox" id="formCheckbox" class="taskCheckbox sr-only" />
+              <input v-model="invoice.email_send_enabled"  
+                   true-value="yes"
+                   false-value="no"
+                   type="checkbox" id="formCheckbox" class="taskCheckbox sr-only" />
               <div
                 class="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-form-strokedark dark:bg-form-input">
                 <span class="text-white opacity-0">

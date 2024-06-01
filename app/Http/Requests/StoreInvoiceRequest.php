@@ -22,7 +22,13 @@ class StoreInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            $this->name => 'required|string',
+            $this->email => 'required|email',
+            $this->phone => 'required|string',
+            $this->service => 'required|string',
+            $this->price_per_hour => 'required|numeric|gt:0',
+            $this->working_hour => 'required|numeric|gt:0',
+            $this->email_send_enabled => 'required|boolean',
         ];
     }
 }
