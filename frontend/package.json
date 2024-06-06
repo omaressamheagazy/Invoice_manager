@@ -19,6 +19,7 @@
     "dropzone": "^6.0.0-beta.2",
     "flatpickr": "^4.6.13",
     "jsvectormap": "^1.5.3",
+    "notiwind": "^2.0.2",
     "nouislider": "^15.7.1",
     "pinia": "^2.1.7",
     "simple-datatables": "^7.2.0",

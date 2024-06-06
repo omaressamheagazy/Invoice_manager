@@ -5,7 +5,10 @@ import 'jsvectormap/dist/css/jsvectormap.min.css'
 import 'flatpickr/dist/flatpickr.min.css'
 import 'swiper/swiper-bundle.css'
 import 'nouislider/dist/nouislider.css'
+import Notifications from 'notiwind'
+
 import 'dropzone/dist/dropzone.css'
+
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -18,6 +21,7 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+app.use(Notifications)
 app.use(VueApexCharts)
 
 app.mount('#app')

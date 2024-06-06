@@ -4,6 +4,7 @@ import DefaultCard from '@/components/Forms/DefaultCard.vue'
 import InputGroup from '@/components/Forms/InputGroup.vue'
 import invoiceApi from '@/services/API/invoice.api'
 import AlertError from '@/components/Alerts/AlertError.vue';
+import { notify } from 'notiwind'
 
 import { ref } from 'vue'
 const invoice = {
@@ -24,9 +25,21 @@ async function createInvoice() {
   try {
     const response = await invoiceApi.createInvoice(invoice)
     console.log(response);
+    notify({
+      title: "Success",
+      text: "Sub-community created successfully",
+      type: "success",
+      group: "app",
+    }, 4000)
   } catch (error) {
-    errorMsg.value = error.response?.data?.errors || error.response?.data?.message || '';
-    showError.value = true
+    if (error.response?.status === 422) {
+      errorMsg.value = error.response?.data?.errors || '';
+      showError.value = true;
+    } else {
+      alert(error.response?.data?.message || 'An error occurred')
+    }
+    console.log(error);
+
   }
 
 }
@@ -72,7 +85,7 @@ async function createInvoice() {
         <div class="mt-5 mb-5.5 flex items-center justify-between">
           <label for="formCheckbox" class="flex cursor-pointer">
             <div class="relative pt-0.5">
-              <input v-model="invoice.email_send_enabled" true-value="yes" false-value="no" type="checkbox"
+              <input v-model="invoice.email_send_enabled" :true-value="true" :false-value="false" type="checkbox"
                 id="formCheckbox" class="taskCheckbox sr-only" />
               <div
                 class="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-form-strokedark dark:bg-form-input">
