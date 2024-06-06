@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import DropdownFour from '@/components/Dropdowns/DropdownFour.vue'
-
+const props = defineProps(['invoices'])
 const users = ref([
   {
     name: 'Musharof Chowdhury',
@@ -35,15 +35,18 @@ const users = ref([
     <div class="min-w-[1170px]">
       <!-- table header start -->
       <div class="grid grid-cols-12 rounded-t-[10px] bg-primary px-5 py-4 lg:px-7.5 2xl:px-11">
-        <div class="col-span-3">
+        <div class="col-span-2">
+          <h5 class="font-medium text-white">reference number</h5>
+        </div>
+
+        <div class="col-span-2">
           <h5 class="font-medium text-white">Name</h5>
         </div>
 
         <div class="col-span-3">
           <h5 class="font-medium text-white">Email</h5>
         </div>
-
-        <div class="col-span-3">
+        <div class="col-span-2">
           <h5 class="font-medium text-white">Service</h5>
         </div>
 
@@ -59,25 +62,28 @@ const users = ref([
 
       <!-- table body start -->
       <div class="bg-white dark:bg-boxdark rounded-b-[10px]">
-        <template v-for="(user, index) in users" :key="index">
+        <template v-for="(invoice, index) in invoices" :key="index">
           <!-- table row item -->
-          <div
-            class="grid grid-cols-12 border-t border-[#EEEEEE] px-5 py-4 dark:border-strokedark lg:px-7.5 2xl:px-11"
-          >
-            <div class="col-span-3">
-              <p class="text-[#637381] dark:text-bodydark">{{ user.name }}</p>
-            </div>
-
-            <div class="col-span-3">
-              <p class="text-[#637381] dark:text-bodydark">{{ user.position }}</p>
-            </div>
-
-            <div class="col-span-3">
-              <p class="text-[#637381] dark:text-bodydark">{{ user.email }}</p>
+          <div class="grid grid-cols-12 border-t border-[#EEEEEE] px-5 py-4 dark:border-strokedark lg:px-7.5 2xl:px-11">
+            <div class="col-span-2">
+              <p class="text-[#637381] dark:text-bodydark">{{ invoice.reference }}</p>
             </div>
 
             <div class="col-span-2">
-              <p class="text-[#637381] dark:text-bodydark">{{ user.role }}</p>
+              <p class="text-[#637381] dark:text-bodydark">{{ invoice.name }}</p>
+            </div>
+
+            <div class="col-span-3">
+              <p class="text-[#637381] dark:text-bodydark">{{ invoice.email }}</p>
+            </div>
+
+            <div class="col-span-2">
+              <p class="text-[#637381] dark:text-bodydark">{{ invoice.service }}</p>
+            </div>
+
+
+            <div class="col-span-2">
+              <p class="text-[#637381] dark:text-bodydark">{{ invoice.total_price }}</p>
             </div>
 
             <div class="col-span-1">

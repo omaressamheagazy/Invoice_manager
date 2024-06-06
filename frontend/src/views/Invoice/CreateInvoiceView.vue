@@ -5,8 +5,9 @@ import InputGroup from '@/components/Forms/InputGroup.vue'
 import invoiceApi from '@/services/API/invoice.api'
 import AlertError from '@/components/Alerts/AlertError.vue';
 import { notify } from 'notiwind'
-
+import { useRouter } from 'vue-router';
 import { ref } from 'vue'
+const router = useRouter()
 const invoice = {
   name: '',
   mobile: '',
@@ -24,21 +25,34 @@ const showError = ref(false)
 async function createInvoice() {
   try {
     const response = await invoiceApi.createInvoice(invoice)
-    console.log(response);
-    notify({
-      title: "Success",
-      text: "Sub-community created successfully",
-      type: "success",
-      group: "app",
-    }, 4000)
+    if(response.status === 201) {
+      notify({
+        title: "Success",
+        text: "Sub-community created successfully",
+        type: "success",
+        group: "app",
+      }, 4000)
+      router.push({ name: 'invoices' })
+    } else {
+      notify({
+        title: "Error",
+        text: "Failed to create the invoice, please try again later!",
+        type: "error",
+        group: "app",
+      }, 4000)
+    }
   } catch (error) {
     if (error.response?.status === 422) {
       errorMsg.value = error.response?.data?.errors || '';
       showError.value = true;
     } else {
-      alert(error.response?.data?.message || 'An error occurred')
+      notify({
+        title: "Error",
+        text: error.response?.data?.message || 'An error occurred',
+        type: "error",
+        group: "app",
+      }, 4000)
     }
-    console.log(error);
 
   }
 
