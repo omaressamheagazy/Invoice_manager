@@ -35,6 +35,11 @@ return [
             'root' => storage_path('app/uploads'),
             'throw' => false,
         ],
+        'invoice' => [
+            'driver' => 'local',
+            'root' => storage_path('app/uploads/invoices'),
+            'throw' => false,
+        ],
 
         'public' => [
             'driver' => 'local',

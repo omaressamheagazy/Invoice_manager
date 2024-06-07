@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
+use App\Http\Resources\InvoiceListResource;
+use App\Http\Resources\InvoiceResource;
+use App\Mail\InvoiceEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Invoice;
+use Illuminate\Support\Facades\Mail;
 
 class InvoiceController extends Controller
 {
@@ -15,7 +21,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::where('user_id', Auth::id())->get();
+        return InvoiceListResource::collection($invoices);
     }
 
     /**
@@ -23,25 +30,24 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
-        try {
-            $validatedData = $request->validated();
-            $validatedData['user_id'] = Auth::id();
-            $invoice = Invoice::create($validatedData);
-            if ($invoice) {
-                // Invoice created successfully
-                // $randomInvoicePath = Str::uuid()->toString() . '.pdf';
-                
-                return response()->json(201);
-            } else {
-                // Invoice creation failed
-                return response()->json(500);
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = Auth::id();
+        $randomInvoicePath = Str::uuid()->toString() . '.pdf';
+        $validatedData['path'] = $randomInvoicePath;
+        $invoice = Invoice::create($validatedData);
+        if ($invoice) {
+            // Invoice created successfully
+            $pdf = PDF::loadView('invoices', ['invoice' => $invoice]);
+            $pdfContent = $pdf->output();
+            Storage::disk('invoice')->put($randomInvoicePath, $pdfContent);
+            if($validatedData['email_send_enabled']) {
+                Mail::to($invoice->email)->send(new InvoiceEmail($invoice));
             }
-        } catch (\Exception $e) {
-            // Error occurred during invoice creation
-            return response()->json([
-                'message' => 'An error occurred while creating the invoice',
-                'error' => $e->getMessage(),
-            ], 500);
+
+            return response()->json(['message' => 'Invoice created successfully'],201);
+        } else {
+            // Return an error response if invoice creation failed
+            return response()->json(['message' => 'Failed to create invoice'], 500);
         }
     }
 
@@ -50,7 +56,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        return new InvoiceResource($invoice);
     }
 
     /**
@@ -58,7 +64,22 @@ class InvoiceController extends Controller
      */
     public function update(UpdateInvoiceRequest $request, Invoice $invoice)
     {
-        //
+        $validatedInvoiceData = $request->validated();
+        $invoiceUpdated = $invoice->update($validatedInvoiceData);
+        $invoice->email_send_enabled = $validatedInvoiceData['email_send_enabled'];
+        if ($invoiceUpdated) {
+            $pdf = PDF::loadView('invoices', ['invoice' => $invoice]);
+            $pdfContent = $pdf->output();
+            Storage::disk('invoice')->put($invoice->path, $pdfContent);
+            if($invoice->email_send_enabled) {
+                Mail::to($invoice->email)->send(new InvoiceEmail($invoice));
+            }
+            return response()->json(['message' => 'Invoice updated successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Failed to update invoice'], 500);
+        }
+            
+            // return response()->json(['message' => 'Invoice updated successfully'], 200);
     }
 
     /**

@@ -83,7 +83,7 @@ const users = ref([
 
 
             <div class="col-span-2">
-              <p class="text-[#637381] dark:text-bodydark">{{ invoice.total_price }}</p>
+              <p class="text-[#637381] dark:text-bodydark">RM {{ invoice.total_price }}</p>
             </div>
 
             <div class="col-span-1">

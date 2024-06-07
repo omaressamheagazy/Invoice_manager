@@ -12,6 +12,7 @@ class Invoice extends Model
         'name',
         'email',
         'mobile',
+        'path',
         'service',
         'price_per_hour',
         'working_hours',

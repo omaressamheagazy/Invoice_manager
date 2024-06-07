@@ -154,7 +154,6 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
@@ -170,6 +169,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
+        \Barryvdh\DomPDF\ServiceProvider::class,
     ])->toArray(),
 
     /*

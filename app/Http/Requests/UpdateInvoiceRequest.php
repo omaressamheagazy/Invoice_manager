@@ -11,7 +11,7 @@ class UpdateInvoiceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->can('update', $this->invoice);
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'mobile' => 'required|string',
+            'service' => 'required|string',
+            'price_per_hour' => 'required|numeric|gt:0',
+            'working_hours' => 'required|numeric|gt:0',
+            'email_send_enabled' => 'required|boolean',
         ];
     }
 }

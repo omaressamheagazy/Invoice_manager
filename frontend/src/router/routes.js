@@ -6,6 +6,7 @@ import SignupView from '@/views/Authentication/SignupView.vue'
 import EmailVerificationView from '@/views/Pages/EmailVerificationView.vue'
 import CreateInvoiceView from '@/views/Invoice/CreateInvoiceView.vue'
 import InvoiceListView from '@/views/Invoice/InvoiceListView.vue'
+import UpdateInvoiceView from '@/views/Invoice/UpdateInvoiceView.vue'
 import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
 import FormElementsView from '@/views/Forms/FormElementsView.vue'
 import FormLayoutView from '@/views/Forms/FormLayoutView.vue'
@@ -66,10 +67,14 @@ export const routes = [
                 component: InvoiceListView,
             },
             {
+                path: 'invoices/:id',
+                name: 'invoiceDetails',
+                component: UpdateInvoiceView,
+            },
+            {
                 path: 'create-invoice',
                 name: 'createInvoice',
                 component: CreateInvoiceView
-
             }
         ]
     },

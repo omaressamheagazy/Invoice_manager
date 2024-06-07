@@ -8,4 +8,11 @@ export default {
   async getAllInvoices() {
     return await axiosClient.get("/invoices")
   },
+  async getInvoiceById(id: number) {
+    return await axiosClient.get(`/invoices/${id}`)
+  },
+  async updateInvoice(id: number, payload) {
+    return await axiosClient.put(`/invoices/${id}`, payload)
+  },
+
 }
