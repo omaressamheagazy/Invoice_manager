@@ -14,5 +14,8 @@ export default {
   async updateInvoice(id: number, payload) {
     return await axiosClient.put(`/invoices/${id}`, payload)
   },
+  async deleteInvoice(id: number) {
+    return await axiosClient.delete(`/invoices/${id}`)
+  },
 
 }

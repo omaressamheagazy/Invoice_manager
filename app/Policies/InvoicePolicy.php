@@ -45,9 +45,11 @@ class InvoicePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Invoice $invoice): bool
+    public function delete(User $user, Invoice $invoice): Response
     {
-        //
+        return $user->id === $invoice->user_id
+            ? Response::allow()
+            : Response::deny('You do not own this invoice.');
     }
 
     /**

@@ -75,7 +75,7 @@
     <div class="container">
         <h1>Invoice</h1>
         <div class="invoice-details">
-            <!-- <p><span class="label">Invoice Number:</span> #{{ $invoice->id }}</p> -->
+            <p><span class="label">Invoice Number:</span> #{{ $invoice->id }}</p>
             <p><span class="label">Date:</span> {{ $invoice->created_at->format('Y-m-d') }}</p>
         </div>
         <table>

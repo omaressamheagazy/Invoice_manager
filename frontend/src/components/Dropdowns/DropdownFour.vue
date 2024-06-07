@@ -1,10 +1,24 @@
 <script setup lang="ts">
+import { ACTION } from '@/Enums/Action';
 import { onClickOutside } from '@vueuse/core'
-import { ref } from 'vue'
-
+import { inject, ref } from 'vue'
+const props = defineProps<{
+  id: number
+}>()
 const target = ref(null)
 const openDropDown = ref(false)
+const triggerAction = inject('triggerAction');
+const handleDownload = (id:number) => {
+  triggerAction(ACTION.download, id);
+};
 
+const handleDelete = (id:number) => {
+  triggerAction(ACTION.delete, id);
+};
+
+const handleEdit = (id:number) => {
+  triggerAction(ACTION.update, id);
+};
 onClickOutside(target, () => {
   openDropDown.value = false
 })
@@ -36,20 +50,20 @@ onClickOutside(target, () => {
       ref="target"
       class="absolute right-0 top-full z-1 mt-1 w-full max-w-39.5 rounded-[5px] bg-white py-2.5 shadow-12 dark:bg-boxdark"
     >
-      <button
+      <button @click="handleEdit(id)"
         class="flex w-full px-4 py-2 text-sm hover:bg-whiter hover:text-primary dark:hover:bg-meta-4"
       >
         Edit
       </button>
-      <button
+      <button @click="handleDelete(id)"
         class="flex w-full px-4 py-2 text-sm hover:bg-whiter hover:text-primary dark:hover:bg-meta-4"
       >
         Delete
       </button>
-      <button
+      <button @click="handleDownload(id)"
         class="flex w-full px-4 py-2 text-sm hover:bg-whiter hover:text-primary dark:hover:bg-meta-4"
       >
-        Details
+        Download
       </button>
     </div>
   </div>

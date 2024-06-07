@@ -86,7 +86,14 @@ class InvoiceController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Invoice $invoice)
-    {
-        //
+    {   
+        $this->authorize('delete', $invoice);
+        $invoiceDeleted = $invoice->delete();
+        if ($invoiceDeleted) {
+            Storage::disk('invoice')->delete($invoice->path);
+            return response()->json(['message' => 'Invoice deleted successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Failed to delete invoice'], 500);
+        }
     }
 }

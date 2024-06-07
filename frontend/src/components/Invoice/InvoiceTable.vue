@@ -87,7 +87,7 @@ const users = ref([
             </div>
 
             <div class="col-span-1">
-              <DropdownFour />
+              <DropdownFour :id="invoice.reference" />
             </div>
           </div>
         </template>
