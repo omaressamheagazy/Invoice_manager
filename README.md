@@ -26,7 +26,6 @@ Next Stage:
 * Searching functionality for the communiteis
 
 ### Screenshots
-For full screenshots please go to : https://drive.google.com/drive/folders/1Jwuv-Jzx7k77to6C36fDbLS7GQ8MxgJV?usp=sharing
 
 <table>
   <tr>
