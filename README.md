@@ -28,15 +28,6 @@ Next Stage:
 ### Screenshots
 For full screenshots please go to : https://drive.google.com/drive/folders/1Jwuv-Jzx7k77to6C36fDbLS7GQ8MxgJV?usp=sharing
 
-![image](https://github.com/omaressamheagazy/Invoice_manager/assets/68665060/a8836cab-638b-401e-8394-fd173df32931)
-![image](https://github.com/omaressamheagazy/Invoice_manager/assets/68665060/9ec62b41-725e-4437-bb83-322a2ac40588)
-![image](https://github.com/omaressamheagazy/Invoice_manager/assets/68665060/a4de24f2-7be0-4823-bd05-f70eb2915007)
-![image](https://github.com/omaressamheagazy/Invoice_manager/assets/68665060/07dbd360-0d01-4937-9f80-a9973231179c)
-![image](https://github.com/omaressamheagazy/Invoice_manager/assets/68665060/4f47f300-87d4-4738-bb67-237b3d5d896a)
-![image](https://github.com/omaressamheagazy/Invoice_manager/assets/68665060/e0fe3709-9c2c-4947-a270-a74c6be1541c)
-![image](https://github.com/omaressamheagazy/Invoice_manager/assets/68665060/b4aed07d-c30a-4d11-95e9-d86e836d5375)
-
-
 <table>
   <tr>
     <td><img src="https://github.com/omaressamheagazy/Invoice_manager/assets/68665060/a8836cab-638b-401e-8394-fd173df32931" width="400"></td>
