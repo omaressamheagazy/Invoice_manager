@@ -8,22 +8,6 @@
 * postgresql
 * Tailwind CSS
 * Docker
-  
-## Stage 2
-
-Currently, The following tasks have implemented:
-
-* User autentication (Login and, registration)
-* Community creation 
-* Sub-community creation 
-* File uploading 
-* User Request 
-* Adding users to communities 
-
-Next Stage:
-
-* Permission system for commmunities, files, and users
-* Searching functionality for the communiteis
 
 ### Screenshots
 
